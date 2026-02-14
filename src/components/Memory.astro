@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  author: string;
+  year?: number;
+  tags?: string[];
+  body: string;
+}
+
+const { title, author, year, tags = [], body } = Astro.props;
+---
+
+<article class="memory-card fade-in">
+  <h3 class="card-title">{title}</h3>
+  <div class="card-meta">
+    <span class="author">@{author}</span>
+    {year && <span class="year">~{year}</span>}
+  </div>
+  <div class="card-body" set:html={body} />
+  {tags.length > 0 && (
+    <div class="card-tags">
+      {tags.map((tag) => (
+        <span class="tag">#{tag}</span>
+      ))}
+    </div>
+  )}
+</article>

@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Memory from '../components/Memory.astro';
+import { getCollection, render } from 'astro:content';
+
+// Fetch all memories, excluding the template
+const allMemories = await getCollection('memories', ({ id }) => !id.startsWith('_'));
+
+// Render markdown bodies
+const memoriesWithHtml = await Promise.all(
+  allMemories.map(async (memory) => {
+    const { Content } = await render(memory);
+    return { ...memory, Content };
+  })
+);
+
+// Sort by year (oldest first), entries without year go last
+memoriesWithHtml.sort((a, b) => {
+  const aYear = a.data.year ?? 9999;
+  const bYear = b.data.year ?? 9999;
+  return aYear - bYear;
+});
+
+const uptimeYears = 50;
+const uptimeDays = uptimeYears * 365 + 12; // accounting for leap years
+---
+
+<Layout>
+  <!-- HERO -->
+  <header class="hero">
+    <p class="prompt fade-in" style="animation-delay: 0.1s;">
+      <span>$</span> ./celebrate --age=50 --style=legendary
+    </p>
+    <h1 class="glow fade-in" style="animation-delay: 0.3s;">
+      Rainman.exe
+    </h1>
+    <p class="subtitle fade-in" style="animation-delay: 0.5s;">
+      has been running for {uptimeYears} years without a segfault<span class="cursor"></span>
+    </p>
+    <p class="fade-in" style="animation-delay: 0.7s; color: var(--text-dim); font-size: 0.85rem; margin-top: 1rem;">
+      PID: 1976 &nbsp;|&nbsp; STATUS: <span style="color: var(--green);">RUNNING</span> &nbsp;|&nbsp; UPTIME: {uptimeDays}d
+    </p>
+  </header>
+
+  <!-- STATS -->
+  <section class="section">
+    <h2 class="section-header">
+      // runtime_stats.log <span class="comment">— by the numbers</span>
+    </h2>
+    <div class="stats-grid">
+      <div class="stat-card fade-in">
+        <div class="stat-value">{uptimeYears}</div>
+        <div class="stat-label">years of uptime</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">bugs created & fixed</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-value">0</div>
+        <div class="stat-label">plans to retire</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-value">404</div>
+        <div class="stat-label">hair follicles not found</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORIES -->
+  <section class="section">
+    <h2 class="section-header">
+      // core_dump.log <span class="comment">— memory fragments recovered</span>
+    </h2>
+    <div class="memories-grid">
+      {memoriesWithHtml.map(({ data, Content }) => (
+        <div>
+          <article class="memory-card fade-in">
+            <h3 class="card-title">{data.title}</h3>
+            <div class="card-meta">
+              <span class="author">@{data.author}</span>
+              {data.year && <span class="year">~{data.year}</span>}
+            </div>
+            <div class="card-body">
+              <Content />
+            </div>
+            {data.tags && data.tags.length > 0 && (
+              <div class="card-tags">
+                {data.tags.map((tag: string) => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- STACK TRACE -->
+  <section class="section">
+    <h2 class="section-header">
+      // stack_trace.log <span class="comment">— how we got here</span>
+    </h2>
+    <div class="stack-trace">
+      <p class="error-msg">CelebrationOverflowError: too many candles on cake (expected &lt;50, got 50)</p>
+      <div class="trace-line">
+        <span class="method">Rainman.init()</span>
+        <span class="file"> (earth.js</span><span class="line-num">:1976)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">Childhood.compile()</span>
+        <span class="file"> (suburbs.js</span><span class="line-num">:1982)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">School.executeTasks()</span>
+        <span class="file"> (education.js</span><span class="line-num">:1994)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">Career.deploy()</span>
+        <span class="file"> (adulting.js</span><span class="line-num">:1998)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">Life.handleMultipleThreads()</span>
+        <span class="file"> (chaos.js</span><span class="line-num">:2005)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">Dad.fork()</span>
+        <span class="file"> (family.js</span><span class="line-num">:2010)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">MidLife.refactor()</span>
+        <span class="file"> (existential.js</span><span class="line-num">:2020)</span>
+      </div>
+      <div class="trace-line">
+        <span class="method">Birthday.celebrate(50)</span>
+        <span class="file"> (party.js</span><span class="line-num">:2026)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>
+      Process <span class="exit-code">rainman</span> will continue running.
+      <br />
+      <span style="color: var(--text-dim);">No SIGTERM can stop this one.</span>
+    </p>
+    <p style="margin-top: 1rem;">
+      Built with love, bad jokes, and too much caffeine by his friends.
+    </p>
+  </footer>
+</Layout>

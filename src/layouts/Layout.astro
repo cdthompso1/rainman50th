@@ -1,0 +1,117 @@
+---
+/*
+ * TODO: refactor this to use the new quantum CSS framework
+ * just kidding, it's 2026 and we still use flexbox
+ */
+interface Props {
+  title?: string;
+}
+
+const { title = "Rainman.exe — 50 Years of Uptime" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Celebrating 50 years of Rainman — the process that refuses to be killed." />
+    <!-- If you're reading this, you're probably a developer. Welcome. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+
+    <!--
+      SEGFAULT: fun not found
+      ...just kidding, there's plenty below
+    -->
+
+    <!--
+      if (age === 50) {
+        console.log("ERROR: Integer overflow in candle_count");
+        console.log("WARN: cake.frosting is deprecated, use cake.fondant instead");
+        console.log("INFO: Rainman has mass-assigned himself to all open issues");
+      }
+    -->
+
+    <!-- You found a secret comment. Rainman still mass-assigns himself to all open issues. Some things never change. -->
+
+    <div class="hidden-birthday" aria-hidden="true">You found me! Rainman's first program printed "Hello Wrold" — typo and all.</div>
+
+    <script>
+      // Happy birthday, Rainman. If you're reading this in DevTools, you're exactly the person we expected.
+      console.log('%c🎂 HAPPY 50TH BIRTHDAY, RAINMAN! 🎂', 'font-size: 24px; font-weight: bold; color: #39ff14; background: #0a0e14; padding: 10px 20px; border: 2px solid #39ff14;');
+      console.log('%c> Process rainman has been running for 50 years.', 'color: #ffb000; font-family: monospace;');
+      console.log('%c> No memory leaks detected. Mostly.', 'color: #ffb000; font-family: monospace;');
+      console.log('%c> kill -9 rainman: Operation not permitted', 'color: #ff3333; font-family: monospace;');
+      console.log('%cPS: We know you\'d read the console. That\'s why we love you.', 'color: #00e5ff; font-style: italic;');
+
+      // Konami code
+      const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+      let konamiIndex = 0;
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === konamiSequence[konamiIndex]) {
+          konamiIndex++;
+          if (konamiIndex === konamiSequence.length) {
+            konamiIndex = 0;
+            activatePartyMode();
+          }
+        } else {
+          konamiIndex = 0;
+        }
+      });
+
+      function activatePartyMode() {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);cursor:pointer;';
+        overlay.innerHTML = `
+          <div style="text-align:center;font-family:monospace;">
+            <div style="font-size:4rem;margin-bottom:1rem;">🎉🎂🎉</div>
+            <div style="font-size:1.5rem;color:#39ff14;margin-bottom:0.5rem;">CHEAT CODE ACTIVATED</div>
+            <div style="color:#ffb000;">+50 years of wisdom</div>
+            <div style="color:#00e5ff;">+∞ respect from friends</div>
+            <div style="color:#ff00ff;">+1 mass email from Rainman</div>
+            <div style="color:#6b7d8f;margin-top:1rem;font-size:0.8rem;">click to dismiss</div>
+          </div>
+        `;
+        overlay.addEventListener('click', () => overlay.remove());
+        document.body.appendChild(overlay);
+
+        // Rainbow border on all cards
+        document.querySelectorAll('.memory-card').forEach((card, i) => {
+          const el = card as HTMLElement;
+          el.style.borderColor = `hsl(${i * 60}, 100%, 50%)`;
+          el.style.boxShadow = `0 0 15px hsl(${i * 60}, 100%, 50%, 0.3)`;
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+
+  .hidden-birthday {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .hidden-birthday:hover {
+    position: static;
+    width: auto;
+    height: auto;
+    opacity: 1;
+    color: var(--magenta);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1rem;
+  }
+</style>

@@ -1,0 +1,5 @@
+# Birthday present for rainman requirements.
+- This application will be purely a markdown file.  You can use HUGO, but if there's a better alternative to rendering a single static page using markdown syntax, that's fine.  use whatever is most current in the industry.
+- The theme of this project is going to be something that provides a funny approach to providing my friend with his 50 year old birthday present.  He's a software developer, so he can appreciate some good tech humor and we refer to him as rainman because of his ability to remember things and being good with numbers.
+- Several of his friends are going to want to commit to this repository so it might make sense to create an agent or multiple sub agents with very specific skills to help them author the best memories and potential fun easter eggs that he'll find as he goes exploring the page.  Careful though, he's going to have access to the code base so let's not highlight when something's an easter egg, let's let him find those over time and get a good laugh.
+- I want to keep this cheap, and deploy it to Amplify AWS eventually so nothing too awful crazy from a deployment complexity perspective.
