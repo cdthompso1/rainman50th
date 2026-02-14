@@ -1,43 +1,87 @@
-# Astro Starter Kit: Minimal
+# Rainman's 50th Birthday Site
+
+A retro terminal-themed birthday site for Rainman, built with [Astro](https://astro.build). Each friend contributes a memory as a markdown file, and the site renders them all into a single page.
+
+## Getting Started
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev       # Start dev server at localhost:4321
+npm run build     # Build static site to ./dist/
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Contributing with Claude Code
 
-## 🚀 Project Structure
+This repo has [Claude Code](https://claude.com/claude-code) skills built in to make contributing easy. You don't need to know Astro or worry about file formats — just run a skill and follow the prompts.
 
-Inside of your Astro project, you'll see the following folders and files:
+### Prerequisites
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+1. Install [Claude Code](https://claude.com/claude-code) if you haven't already
+2. Clone this repo and `cd` into it
+3. Run `npm install`
+
+### Adding Your Memory
+
+Open Claude Code in this repo and type:
+
+```
+/add-memory
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Claude will walk you through it — ask for your name, your memory of Rainman, and help you write it up with the right format and tone. It creates the markdown file for you and verifies the build.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+If you'd rather do it manually, copy `src/content/memories/_template.md` to `src/content/memories/your-name.md` and fill it in.
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Adding an Easter Egg
 
-## 🧞 Commands
+Want to hide something fun for Rainman to discover? Open Claude Code and type:
 
-All commands are run from the root of the project, from a terminal:
+```
+/add-easter-egg
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Claude will help you plant a hidden surprise — a CSS trick, a console message, a sneaky HTML comment, whatever you want. The only rule: don't label it as an easter egg anywhere.
 
-## 👀 Want to learn more?
+### Reviewing a Contribution
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Before merging someone's PR, run:
+
+```
+/review-contribution
+```
+
+Claude will check the markdown frontmatter, content quality, build integrity, and make sure no easter eggs were accidentally exposed.
+
+## Project Structure
+
+```
+src/
+├── pages/index.astro              # Main page (hero, stats, memories, stack trace)
+├── layouts/Layout.astro           # HTML shell with retro terminal theme
+├── components/Memory.astro        # Memory card component
+├── content/
+│   └── memories/                  # One .md file per contributor
+│       ├── _template.md           # Copy this to add a memory
+│       ├── system.md              # The origin story
+│       └── ricky.md               # Example contribution
+└── styles/global.css              # Terminal/retro aesthetic
+```
+
+## Memory File Format
+
+Each memory is a markdown file in `src/content/memories/` with this frontmatter:
+
+```yaml
+---
+author: "Your Name"       # required
+title: "Short Title"      # required
+year: 2020                # optional
+tags: ["funny"]           # optional — e.g. "funny", "wholesome", "legendary", "cursed"
+---
+
+Your memory goes here. Markdown supported.
+```
+
+## Deployment
+
+The site deploys to AWS Amplify automatically. The build config is in `amplify.yml` — it just runs `npm run build` and serves the `dist/` folder.
