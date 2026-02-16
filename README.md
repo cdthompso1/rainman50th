@@ -84,4 +84,4 @@ Your memory goes here. Markdown supported.
 
 ## Deployment
 
-The site deploys to AWS Amplify automatically. The build config is in `amplify.yml` — it just runs `npm run build` and serves the `dist/` folder.
+The site deploys to AWS Amplify automatically upon a commit to main occurring.
