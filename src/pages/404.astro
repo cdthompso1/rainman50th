@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 — Page Not Found">
+  <div class="not-found">
+    <p class="prompt">
+      <span>$</span> ./find --page=requested
+    </p>
+    <p class="error-line">ERROR 404: page not found</p>
+
+    <img
+      src="/ct-missing.png"
+      alt="Missing person on a milk carton"
+      class="milk-carton"
+    />
+
+    <p class="message">
+      The page you are attempting to reach does not exist.
+    </p>
+    <p class="message sub">
+      Please reach out to the owner of the page and share the broken link.
+    </p>
+
+    <a href="/" class="home-link">&larr; return to base</a>
+  </div>
+</Layout>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .prompt {
+    color: var(--amber);
+    font-size: 0.9rem;
+  }
+
+  .prompt span {
+    color: var(--text);
+  }
+
+  .error-line {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--red);
+    text-shadow: 0 0 10px var(--red);
+  }
+
+  .milk-carton {
+    width: min(260px, 60vw);
+    filter: drop-shadow(0 0 20px rgba(57, 255, 20, 0.15));
+  }
+
+  .message {
+    color: var(--text);
+    font-size: 0.95rem;
+    max-width: 480px;
+  }
+
+  .message.sub {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  .home-link {
+    margin-top: 0.5rem;
+    color: var(--cyan);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+
+  .home-link:hover {
+    text-decoration: underline;
+  }
+</style>
