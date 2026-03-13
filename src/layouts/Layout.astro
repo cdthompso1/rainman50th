@@ -21,6 +21,13 @@ const { title = "Rainman.exe — 50 Years of Uptime" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <div id="splash">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 60" width="340" height="60" aria-label="OnlyFans">
+        <text y="48" font-family="Arial Black, sans-serif" font-weight="900" font-size="52">
+          <tspan fill="#00AFF0">Only</tspan><tspan fill="white">Fans</tspan>
+        </text>
+      </svg>
+    </div>
     <slot />
 
     <!--
@@ -39,6 +46,12 @@ const { title = "Rainman.exe — 50 Years of Uptime" } = Astro.props;
     <!-- You found a secret comment. Rainman still mass-assigns himself to all open issues. Some things never change. -->
 
     <div class="hidden-birthday" aria-hidden="true">You found me! Rainman's first program printed "Hello Wrold" — typo and all.</div>
+
+    <script>
+      const splash = document.getElementById('splash');
+      setTimeout(() => { splash.classList.add('splash-fade'); }, 3000);
+      splash.addEventListener('transitionend', () => splash.remove());
+    </script>
 
     <script>
       // Happy birthday, Rainman. If you're reading this in DevTools, you're exactly the person we expected.
@@ -93,6 +106,21 @@ const { title = "Rainman.exe — 50 Years of Uptime" } = Astro.props;
 
 <style is:global>
   @import '../styles/global.css';
+
+  #splash {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease;
+  }
+
+  #splash.splash-fade {
+    opacity: 0;
+  }
 
   .hidden-birthday {
     position: absolute;
