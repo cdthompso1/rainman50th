@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Memory from '../components/Memory.astro';
 import EasterEgg from '../components/EasterEgg.astro';
+import ElfGame from '../components/ElfGame.astro';
 import { getCollection, render } from 'astro:content';
 
 // Fetch all memories, excluding the template
@@ -97,6 +98,9 @@ const uptimeDays = uptimeYears * 365 + 12; // accounting for leap years
       ))}
     </div>
   </section>
+
+  <!-- ELF GAME -->
+  <ElfGame />
 
   <!-- STACK TRACE -->
   <section class="section">
