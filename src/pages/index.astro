@@ -1,12 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Memory from '../components/Memory.astro';
-import EasterEgg from '../components/EasterEgg.astro';
-import ElfGame from '../components/ElfGame.astro';
-import { getCollection, render } from 'astro:content';
+import Layout from "../layouts/Layout.astro";
+import Memory from "../components/Memory.astro";
+import EasterEgg from "../components/EasterEgg.astro";
+import ElfGame from "../components/ElfGame.astro";
+import { getCollection, render } from "astro:content";
 
 // Fetch all memories, excluding the template
-const allMemories = await getCollection('memories', ({ id }) => !id.startsWith('_'));
+const allMemories = await getCollection(
+  "memories",
+  ({ id }) => !id.startsWith("_")
+);
 
 // Render markdown bodies
 const memoriesWithHtml = await Promise.all(
@@ -33,14 +36,18 @@ const uptimeDays = uptimeYears * 365 + 12; // accounting for leap years
     <p class="prompt fade-in" style="animation-delay: 0.1s;">
       <span>$</span> ./celebrate --age=50 --style=legendary
     </p>
-    <h1 class="glow fade-in" style="animation-delay: 0.3s;">
-      Rainman.exe
-    </h1>
+    <h1 class="glow fade-in" style="animation-delay: 0.3s;">Rainman.exe</h1>
     <p class="subtitle fade-in" style="animation-delay: 0.5s;">
-      has been running for {uptimeYears} years without a segfault<span class="cursor"></span>
+      has been running for {uptimeYears} years without a segfault<span
+        class="cursor"></span>
     </p>
-    <p class="fade-in" style="animation-delay: 0.7s; color: var(--text-dim); font-size: 0.85rem; margin-top: 1rem;">
-      PID: 1976 &nbsp;|&nbsp; STATUS: <span style="color: var(--green);">RUNNING</span> &nbsp;|&nbsp; UPTIME: {uptimeDays}d
+    <p
+      class="fade-in"
+      style="animation-delay: 0.7s; color: var(--text-dim); font-size: 0.85rem; margin-top: 1rem;"
+    >
+      PID: 1976 &nbsp;|&nbsp; STATUS: <span style="color: var(--green);"
+        >RUNNING</span
+      > &nbsp;|&nbsp; UPTIME: {uptimeDays}d
     </p>
   </header>
 
@@ -75,27 +82,29 @@ const uptimeDays = uptimeYears * 365 + 12; // accounting for leap years
       // core_dump.log <span class="comment">— memory fragments recovered</span>
     </h2>
     <div class="memories-grid">
-      {memoriesWithHtml.map(({ data, Content }) => (
-        <div>
-          <article class="memory-card fade-in">
-            <h3 class="card-title">{data.title}</h3>
-            <div class="card-meta">
-              <span class="author">@{data.author}</span>
-              {data.year && <span class="year">~{data.year}</span>}
-            </div>
-            <div class="card-body">
-              <Content />
-            </div>
-            {data.tags && data.tags.length > 0 && (
-              <div class="card-tags">
-                {data.tags.map((tag: string) => (
-                  <span class="tag">#{tag}</span>
-                ))}
+      {
+        memoriesWithHtml.map(({ data, Content }) => (
+          <div>
+            <article class="memory-card fade-in">
+              <h3 class="card-title">{data.title}</h3>
+              <div class="card-meta">
+                <span class="author">@{data.author}</span>
+                {data.year && <span class="year">~{data.year}</span>}
               </div>
-            )}
-          </article>
-        </div>
-      ))}
+              <div class="card-body">
+                <Content />
+              </div>
+              {data.tags && data.tags.length > 0 && (
+                <div class="card-tags">
+                  {data.tags.map((tag: string) => (
+                    <span class="tag">#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          </div>
+        ))
+      }
     </div>
   </section>
 
@@ -108,30 +117,41 @@ const uptimeDays = uptimeYears * 365 + 12; // accounting for leap years
       // stack_trace.log <span class="comment">— how we got here</span>
     </h2>
     <div class="stack-trace">
-      <p class="error-msg">CelebrationOverflowError: too many candles on cake (expected &lt;50, got 50)</p>
+      <p class="error-msg">
+        CelebrationOverflowError: too many candles on cake (expected &lt;50, got
+        50)
+      </p>
       <div class="trace-line">
         <span class="method">Rainman.init()</span>
         <span class="file"> (earth.js</span><span class="line-num">:1976)</span>
       </div>
       <div class="trace-line">
         <span class="method">Childhood.compile()</span>
-        <span class="file"> (suburbs.js</span><span class="line-num">:1982)</span>
+        <span class="file"> (suburbs.js</span><span class="line-num"
+          >:1982)</span
+        >
       </div>
       <div class="trace-line">
         <span class="method">School.executeTasks()</span>
-        <span class="file"> (education.js</span><span class="line-num">:1994)</span>
+        <span class="file"> (education.js</span><span class="line-num"
+          >:1994)</span
+        >
       </div>
       <div class="trace-line">
         <span class="method">Career.deploy()</span>
-        <span class="file"> (adulting.js</span><span class="line-num">:1998)</span>
+        <span class="file"> (adulting.js</span><span class="line-num"
+          >:1998)</span
+        >
       </div>
       <div class="trace-line">
         <span class="method">Dad.fork()</span>
-        <span class="file"> (family.js</span><span class="line-num">:2004)</span>
+        <span class="file"> (family.js</span><span class="line-num">:2004)</span
+        >
       </div>
       <div class="trace-line">
         <span class="method">Dad.fork()</span>
-        <span class="file"> (family.js</span><span class="line-num">:2008)</span>
+        <span class="file"> (family.js</span><span class="line-num">:2006)</span
+        >
       </div>
       <div class="trace-line">
         <span class="method">Life.handleMultipleThreads()</span>
@@ -139,7 +159,9 @@ const uptimeDays = uptimeYears * 365 + 12; // accounting for leap years
       </div>
       <div class="trace-line">
         <span class="method">MidLife.refactor()</span>
-        <span class="file"> (existential.js</span><span class="line-num">:2020)</span>
+        <span class="file"> (existential.js</span><span class="line-num"
+          >:2020)</span
+        >
       </div>
       <div class="trace-line">
         <span class="method">Birthday.celebrate(50)</span>
