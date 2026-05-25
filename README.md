@@ -84,4 +84,4 @@ Your memory goes here. Markdown supported.
 
 ## Deployment
 
-The site deploys to AWS Amplify automatically upon a commit to main occurring.
+The site deploys to GitHub Pages automatically upon a commit to main occurring.
