@@ -2,7 +2,7 @@
   "name": "rainman",
   "type": "module",
   "version": "0.0.1",
-  "homepage": "https://cdthompso1.github.io/rainman50th",
+  "homepage": "https://rainman.ninja",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
